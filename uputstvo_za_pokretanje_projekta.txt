@@ -1,0 +1,22 @@
+UPUTSTVO ZA POKRETANJE IMPLEMENTACIONOG DELA DIPLOMSKOG RADA:
+
+Internet aplikacija implementirana je u MEAN tehnologiji, pri čemu je korišćen Visual Studio Code. 
+U folderu crashCourseApp(copy) nalaze se fajlovi razvrstani po folderima backend i frontend i iz njih 
+su izostavljeni folderi node_modules. Da bi se projekat pokrenuo potrebno je da se uradi sledeće: 
+
+1. Pozicionirati se preko File Explorer-a u folder crashCourseApp(copy) i otvoriti cmd. U njemu ukucati 
+   komandu : code . kako bi se projekat otvorio u okruženju Visual Studio Code. 
+
+2. Zatim ukucati komandu : npm install kako bi se svi potrebni moduli instalirali. Informacija o tome 
+   šta je neophodno da se dodatno instalira (ime instalacije i verzija), nalazi se u fajlu package.json i
+   ovom komandom se automatski pokreće instalacija svih neophodnih modula. 
+
+3. Pokrenuti rad baze sa komandom: mongod (važno je da je ovakva komanta dodata u sistemske varijable)
+
+4. Otvoriti novi cmd prozor kao administrator i pozicionirati se u folder backend u okviru foldera crashCourseApp(copy). 
+   Uneti komandu: npm run dev, koja omogućava pokretanje servera. 
+
+5. Otvoriti novi cmd prozor kao administrator i pozicionirati se u folder frontend u okviru foldera crashCourseApp(copy).
+   Tu se nalaze fajlovi koji čine klijentski deo aplikacije i deo su Angular radnog okvira. 
+   Pomoću komande: ng serve --open (ili samo ng serve ako je potrebno da se samo projekat osveži) aplikacija se 
+   otvara u internet pretraživaču koji se koristi. (adresa: localhost/4200)
