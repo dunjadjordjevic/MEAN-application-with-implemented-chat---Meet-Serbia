@@ -1,0 +1,269 @@
+
+<mat-tab-group mat-align-tabs="end">
+   
+    <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon color="primary" class="example-tab-icon">toc</mat-icon>
+         &nbsp;
+          Pregled oglasa na čekanju
+        </ng-template>
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                  
+                 &nbsp;
+                 Oglasi za proizvode
+                </ng-template>
+
+                <!-- kontent ide ovde  -->
+
+
+                <div class="centeredDiv">
+
+                    <mat-card class="adminCard"> 
+                       
+                        <mat-card-header class="headerClass">
+                            <mat-card-title>
+                                Pregled oglasa koji čekaju na odobrenje
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                Oglase koji se nalaze u nastavku možete odobriti ili odbaciti u zavisnosti od procene sadržaja
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            
+                            <!-- table for products -->
+                            <div class="mat-elevation-z8">
+                                <table mat-table [dataSource]="dataSourceProductAd">
+                              
+                                  
+                                  <ng-container  matColumnDef="naziv oglasa">
+                                    <th mat-header-cell class="columnClassBig" *matHeaderCellDef> {{columnNameProductAdList[0]}}</th>
+                                    <td mat-cell  *matCellDef="let productAd"> {{productAd.nameOfAd}} </td>
+                                  </ng-container>
+                              
+                            
+                                  <ng-container matColumnDef="datum postavljanja">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameProductAdList[1]}}</th>
+                                    <td mat-cell *matCellDef="let productAd"> {{productAd.dateOfPost}} </td>
+                                  </ng-container>
+                              
+                               
+                                  <ng-container matColumnDef="vlasnik oglasa">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef>{{columnNameProductAdList[2]}}  </th>
+                                    <td mat-cell *matCellDef="let productAd"> 
+                                      <a [routerLink]="['/see-profile']" [queryParams]="{ username: productAd.ownerUsername}" >
+                                        {{productAd.ownerUsername}} 
+                                      </a>
+                                    </td>
+                                  </ng-container>
+                              
+                             
+                                  <ng-container matColumnDef="cena">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameProductAdList[3]}} </th>
+                                    <td mat-cell *matCellDef="let productAd"> {{productAd.price}}</td>
+                                  </ng-container>
+                
+                                  <ng-container matColumnDef="težina">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameProductAdList[4]}}</th>
+                                    <td mat-cell *matCellDef="let productAd"> {{productAd.weight}}</td>
+                                  </ng-container>
+                
+                                  <ng-container matColumnDef="sastav proizvoda">
+                                    <th mat-header-cell class="columnClassBig" *matHeaderCellDef> {{columnNameProductAdList[5]}} </th>
+                                    <td mat-cell *matCellDef="let productAd"> {{productAd.structureOfProduct}}</td>
+                                  </ng-container>
+                
+                                  <ng-container matColumnDef="tip proizvoda">
+                                    <th mat-header-cell class="columnClassBig" *matHeaderCellDef> {{columnNameProductAdList[6]}} </th>
+                                    <td mat-cell *matCellDef="let productAd"> {{productAd.typeOfProduct}}</td>
+                                  </ng-container>
+                
+                                  <ng-container matColumnDef="opis">
+                                    <th mat-header-cell class="columnClassBig" *matHeaderCellDef> {{columnNameProductAdList[7]}} </th>
+                                    <td mat-cell *matCellDef="let productAd"> {{productAd.description}} </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="odobri">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameProductAdList[8]}} </th>
+                                    <td mat-cell *matCellDef="let productAd">
+                                      <button mat-mini-fab color="primary" aria-label="approve" (click)="approveAd('productAd', productAd._id)">
+                                        <mat-icon>done</mat-icon>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="odbaci">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameProductAdList[9]}} </th>
+                                    <td mat-cell *matCellDef="let productAd"> 
+                                      <button mat-mini-fab color="warn" aria-label="not_approve" (click)="declineAd('productAd', productAd._id)">
+                                        <mat-icon>close</mat-icon>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+                              
+                                  <tr mat-header-row class="table-header-row" *matHeaderRowDef="displayedColumnsProductAd; sticky: true"></tr>
+                                  <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumnsProductAd;"></tr>
+                                </table>
+                              
+                                <mat-paginator  showFirstLastButtons></mat-paginator>
+                              </div> 
+                
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+                
+
+
+
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                 &nbsp;
+                  Oglasi za smeštaj
+                </ng-template>
+
+                <div class="centeredDiv">
+                    <mat-card class="adminCard"> 
+                       
+                        <mat-card-header class="headerClass">
+                            <mat-card-title>
+                                Pregled oglasa koji čekaju na odobrenje
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                Oglase koji se nalaze u nastavku možete odobriti ili odbaciti u zavisnosti od procene sadržaja
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                             
+                            <!-- table for accommodation -->
+                           <div class="mat-elevation-z8">
+                                <table mat-table [dataSource]="dataSourceAccommodationAd">
+                              
+                                  
+                                  <ng-container matColumnDef="naziv oglasa">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameAccommodationAdList[0]}}</th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> {{accommodationAd.nameOfAd}} </td>
+                                  </ng-container>
+                              
+                            
+                                  <ng-container matColumnDef="datum postavljanja">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef>{{columnNameAccommodationAdList[1]}}</th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> {{accommodationAd.dateOfPost}}  </td>
+                                  </ng-container>
+                              
+                               
+                                  <ng-container matColumnDef="vlasnik oglasa">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef>{{columnNameAccommodationAdList[2]}}  </th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> 
+                                      <a [routerLink]="['/see-profile']" [queryParams]="{ username: accommodationAd.ownerUsername}">
+                                        {{accommodationAd.ownerUsername}}  
+                                      </a>
+                                    </td>
+                                  </ng-container>
+                              
+                             
+                                  <ng-container matColumnDef="destinacija">
+                                    <th mat-header-cell class="columnClassBig" *matHeaderCellDef>{{columnNameAccommodationAdList[3]}} </th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> {{accommodationAd.destination}} </td>
+                                  </ng-container>
+                
+                                  <ng-container matColumnDef="cena">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef>{{columnNameAccommodationAdList[4]}}</th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> {{accommodationAd.price}} </td>
+                                  </ng-container>
+                
+                                  <ng-container matColumnDef="vrsta smeštaja">
+                                    <th mat-header-cell class="columnClassBig" *matHeaderCellDef> {{columnNameAccommodationAdList[5]}} </th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> {{accommodationAd.typeOfAccommodation}}</td>
+                                  </ng-container>
+                
+                                  <ng-container matColumnDef="tip usluge">
+                                    <th mat-header-cell class="columnClassBig" *matHeaderCellDef> {{columnNameAccommodationAdList[6]}}</th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> {{accommodationAd.typeOfService}}</td>
+                                  </ng-container>
+                
+                                  <ng-container matColumnDef="opremljenost">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameAccommodationAdList[7]}} </th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> {{accommodationAd.equipment}}</td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="opis">
+                                    <th mat-header-cell class="columnClassBig" *matHeaderCellDef> {{columnNameAccommodationAdList[8]}} </th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> {{accommodationAd.description}} </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="odobri">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameAccommodationAdList[9]}} </th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> 
+                                      <button mat-mini-fab color="primary" aria-label="approve" (click)="approveAd('accommodationAd', accommodationAd._id)">
+                                        <mat-icon>done</mat-icon>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="odbaci">
+                                    <th mat-header-cell class="columnClassSmall" *matHeaderCellDef> {{columnNameAccommodationAdList[10]}} </th>
+                                    <td mat-cell *matCellDef="let accommodationAd"> 
+                                      <button mat-mini-fab color="warn" aria-label="not_approve" (click)="declineAd('accommodationAd', accommodationAd._id)">
+                                        <mat-icon>close</mat-icon>
+                                      </button>
+                                    </td>
+                                  </ng-container>
+                              
+                                  <tr mat-header-row class="table-header-row" *matHeaderRowDef="displayedColumnsAccommodationAd; sticky: true"></tr>
+                                  <tr mat-row class="table-row" *matRowDef="let row; columns: displayedColumnsAccommodationAd;"></tr>
+                                  
+                                </table>
+                              
+                                <mat-paginator showFirstLastButtons></mat-paginator>
+                              </div> 
+                 
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+            </mat-tab>
+        </mat-tab-group>
+        
+
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon color="primary" class="example-tab-icon">question_answer</mat-icon>
+         &nbsp;
+          Podrška za kupce
+        </ng-template>
+        
+        <mat-tab-group mat-align-tabs="center">
+   
+          <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon color="primary" class="example-tab-icon">mail</mat-icon>
+               &nbsp;
+                Ćaskanje
+              </ng-template>
+              <app-admin-chat></app-admin-chat>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon color="primary" class="example-tab-icon">inbox</mat-icon>
+             &nbsp;
+              Sanduče
+            </ng-template>
+            <app-inbox></app-inbox>
+          </mat-tab>
+        </mat-tab-group>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="primary" class="example-tab-icon">close</mat-icon>
+        <button mat-button (click)=logOut()> Odjavi se </button>
+      </ng-template>
+  </mat-tab>
+</mat-tab-group>
+
+
+

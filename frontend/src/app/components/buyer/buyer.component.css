@@ -1,0 +1,22 @@
+.divWithoutTransition
+{
+  transition: none;
+}
+
+.centeredDiv
+{
+  text-align: center;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+mat-grid-tile
+{
+    background:mintcream;
+}
+
+
+.mat-tab-group{
+  font-size: 15px;
+  background-color:mintcream;
+}

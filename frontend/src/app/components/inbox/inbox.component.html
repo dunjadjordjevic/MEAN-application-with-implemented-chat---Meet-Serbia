@@ -1,0 +1,34 @@
+<div class="chat-messages-show-container">
+    <mat-card class="container">
+        <mat-grid-list cols="4" rowHeight="500px" >
+            <mat-grid-tile  class="userList">
+                <form #selectUser="ngForm" class="listForm">
+                   
+                    <span *ngFor="let user of users">
+                        <button class="buttonList" mat-stroked-button (click)="seeMessagesWith(user.username)">{{user.username}}</button>  <hr>
+                    </span>
+                </form>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="3" class="messages">
+                <span class="maxSpan" *ngIf="logs!=null && logs.length!=0">
+                    <span class="maxSpan" *ngFor="let log of logs">
+                        <p class="obliqueParagraph">
+                         <strong>  Datum i vreme početka: </strong>  {{log.dateAndTimeOfStart}} <br> 
+                            <strong> Datum i vreme završetka:</strong>  {{log.dateAndTimeOfEnd}} <br>
+                        </p>
+                       
+                        <span *ngFor="let message of log.messages">
+                            {{message}}  <br>
+                        </span>
+                        <hr> <br>
+                    </span>
+                </span>
+                <span class="maxSpan" *ngIf="logs!=null && logs.length==0">
+                    <div class="centeredDiv">
+                        <strong>Za odabranog učesnika nema konverzacija za prikazati!</strong> 
+                    </div>
+                </span>
+            </mat-grid-tile>
+          </mat-grid-list>
+    </mat-card>
+</div>

@@ -1,0 +1,44 @@
+<div class="centeredDiv">
+        <mat-card class="centeredCard">
+        <mat-card-header>
+             <mat-card-title>
+                <mat-icon matSuffix>login</mat-icon>
+                <br>
+                    Prijava
+                </mat-card-title> 
+        </mat-card-header>
+    
+    <mat-card-content>
+        <form #logInForm="ngForm">
+            <table class="centeredTable"> 
+                <tr>
+                    <mat-form-field >
+                        <mat-icon matSuffix>person</mat-icon>
+                        <mat-label>Korisničko ime</mat-label>
+                        <input matInput name="username"  [(ngModel)]="username"  required>
+                        
+                    </mat-form-field>  
+                </tr>   
+                <tr>
+                    <mat-form-field >
+                        <mat-icon matSuffix>lock</mat-icon>
+                        <mat-label>Lozinka</mat-label>
+                        <input matInput name="password"  [(ngModel)]="password"  required>
+                       
+                    </mat-form-field>  
+                </tr>
+                
+            </table>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <div class="centeredDiv">
+            <button mat-raised-button class="buttonColored"  (click)="login(logInForm.valid)" color="primary">Uloguj se</button>
+            <br> <br>
+            <a routerLink='/forgotten-password'> Zaboravili ste lozinku? </a>
+        </div>
+    </mat-card-actions>
+
+    </mat-card>
+</div>

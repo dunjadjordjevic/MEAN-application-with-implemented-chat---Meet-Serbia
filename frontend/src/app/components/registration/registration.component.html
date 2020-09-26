@@ -1,0 +1,246 @@
+
+<div class="centeredCard">
+    <mat-card class="registrationCard">
+        <mat-card-header class="centeredTitle">
+             <mat-card-title >Registracija korisnika</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content >
+            <mat-horizontal-stepper [linear]="true" #stepper>
+            <mat-step [editable]="false" [completed]="compFirstAndSecond">
+            <form #firstForm="ngForm">
+                <div class="centeredDiv">
+                    <ng-template matStepLabel>Osnovni podaci za registraciju</ng-template>
+                    <table class="centeredTable">
+                        
+                        <tr>
+                            <td>
+                                <mat-form-field>
+                                    <mat-label>Korisničko ime</mat-label>
+                                    <input matInput name="username"  [(ngModel)]="user.username"  required>
+                                    <mat-error *ngIf="usernamee.invalid ">{{getErrorMessageForUsername()}}</mat-error>
+                                    <mat-icon matSuffix>person</mat-icon>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field >
+                                    <mat-label>Lozinka</mat-label>
+                                    <input matInput type="password"  required  [(ngModel)]="user.password" name="password"
+                                     pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,12}$">
+                                     <mat-error *ngIf="passwordd.invalid">{{getErrorMessageForPassword()}}</mat-error>
+                                    <mat-icon matSuffix  [matTooltip]="message.value">lock</mat-icon>
+                                </mat-form-field>
+
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                                <td>
+                                    <mat-form-field >
+                                        <mat-label>E-mail</mat-label>
+                                        <input matInput type="email" name="email" [(ngModel)]="user.email"  placeholder="mail@gmail.com" name="email"  required>
+                                        <mat-error  *ngIf="emaill.invalid">{{getErrorMessageForEmail()}}</mat-error>
+                                        <mat-icon matSuffix >email</mat-icon>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field  >
+                                        <mat-label>Potvrda lozinke</mat-label>
+                                        <input matInput type="password" name="passwordCheck" [(ngModel)]="passwordCheck"  required>
+                                        <mat-icon matSuffix  >lock</mat-icon>
+                                        <mat-hint>Potvrdite unetu lozinku</mat-hint>
+                                    </mat-form-field>
+                                </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <mat-form-field >
+                                    <mat-label>Tip korisnika</mat-label>
+                                    <mat-select  [(ngModel)]="typeOfUserInput" name="typeOfUserInput" [(ngModel)]="user.typeOfUser" required>
+                                      <mat-option value="seller">Prodavac</mat-option>
+                                      <mat-option value="buyer">Kupac</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="centeredDiv" *ngIf='typeOfUserInput=="buyer"'>
+                                    <button [disabled]="!firstForm.valid"  color="primary" mat-button (click)="stepElementaryData(stepper)">Dalje</button>
+                                </div>
+                            </td>
+                        </tr>
+                        </table>
+                    </div>
+            </form>
+        
+
+        
+            <form #secondForm="ngForm" *ngIf='typeOfUserInput=="seller"'>
+                <div class="centeredDiv">
+                    <mat-form-field >
+                        <mat-label>Pravno ili fizičko lice</mat-label>
+                        <mat-select  [(ngModel)]="legalEntityOrIndividual" name="sellerType" required >
+                            <mat-option value="individual" name="individual">Fizičko lice</mat-option>
+                            <mat-option value="legalEntity" name="legalEntity">Pravno lice</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <div class="centeredDiv">
+                        
+                        <button color="primary" [disabled]="!firstForm.valid || !secondForm.valid" mat-button (click)="stepElementaryData(stepper)">Dalje</button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+
+        
+    <mat-step [editable]="false" [completed]="compThirdAndFourth">
+        <form #thirdAndFourthForm="ngForm"> 
+            <ng-template matStepLabel  > Podaci o korisniku </ng-template>
+
+            <!-- Individual check -->
+                <form #thirdForm="ngForm" *ngIf='typeOfUserInput=="buyer" || (typeOfUserInput=="seller" && legalEntityOrIndividual=="individual")'>
+                    <div class="centeredDiv">
+                        <table class="centeredTable">
+                            <ng-template matStepLabel  *ngIf='typeOfUserInput=="buyer"'> Podaci o korisniku (kupcu)</ng-template>
+                            <ng-template matStepLabel *ngIf='typeOfUserInput=="seller" && legalEntityOrIndividual=="individual"'>Podaci o korisniku (prodavac - fizičko lice)</ng-template>
+                            <tr>
+                                <br>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-form-field >
+                                        <mat-label>Ime</mat-label>
+                                        <input matInput name="name" required  [(ngModel)]="user.name">
+                                    </mat-form-field> 
+                                </td>
+                                <td>
+                                    <mat-form-field >
+                                        <mat-label>Prezime</mat-label >
+                                        <input matInput name="surname" required  [(ngModel)]="user.surname">
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-form-field>
+                                        <mat-label>Zanimanje</mat-label>
+                                        <input matInput name="occupation"  [(ngModel)]="user.occupation">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field >
+                                        <mat-label>Pol</mat-label>
+                                        <mat-select disableRipple name="gender"  [(ngModel)]="user.gender">
+                                        <mat-option value="Muški" name="male">Muški</mat-option>
+                                        <mat-option value="Ženski" name="female">Ženski</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <mat-form-field>
+                                        <mat-label>Kontakt telefon</mat-label>
+                                        <span matPrefix>+381 &nbsp;</span>
+                                        <input matInput type="tel" name="telephone" required pattern="^[0-9]{6}$"  [(ngModel)]="user.contactTelephone">
+                                        <mat-error *ngIf="tell.invalid">{{getErrorMessageForTel()}}</mat-error>
+                                        <mat-icon matSuffix>phone</mat-icon>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <button mat-button color="primary" matStepperPrevious>Nazad</button>
+                                    <button color="primary" [disabled]="!thirdForm.valid" mat-button (click)="stepIndividual(stepper)">Dalje</button>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    
+                        
+                    </div>
+                </form>
+
+         <!-- Legal entity checked -->
+         <form #fourthForm="ngForm" *ngIf='typeOfUserInput=="seller" && legalEntityOrIndividual=="legalEntity"'>
+            <div class="centeredDiv" >
+                <table class="centeredTable">
+                    <ng-template matStepLabel >Podaci o korisniku (prodavac - pravno lice)</ng-template>
+                    <tr>
+                        <td>
+                            <mat-form-field >
+                                <mat-label>Naziv firme</mat-label>
+                                <input matInput name="name" required  [(ngModel)]="user.name">
+                            </mat-form-field> 
+                        </td>
+                        <td>
+                            <mat-form-field >
+                                <mat-label>Delatnost rada</mat-label>
+                                <input matInput name="occupation" required  [(ngModel)]="user.occupation">
+                            </mat-form-field>
+                        </td>     
+                    </tr>
+                    <tr>
+                                       
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <mat-form-field>
+                                <mat-label>Kontakt telefon</mat-label>
+                                <span matPrefix>+381 &nbsp;</span>
+                                <input type="tel" matInput name="telephone" required  [(ngModel)]="user.contactTelephone">
+                                <mat-icon matSuffix>phone</mat-icon>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button mat-button color="primary" matStepperPrevious>Nazad</button>
+                            <button color="primary" [disabled]="!fourthForm.valid" mat-button (click)="stepLegalEntity(stepper)">Dalje</button>
+                          </td>
+                    </tr>
+                    
+                </table>
+             
+                
+            </div>
+        </form>
+    </form>
+    </mat-step>
+
+    <mat-step [editable]="false" [completed]="compFifth">
+        <form #fifthForm="ngForm">
+          <table class="centeredTable">
+            <ng-template matStepLabel>Profilna slika</ng-template>
+            <tr>
+                <td colspan="2">
+                    Učitajte Vašu profilnu sliku <br> <br>
+                    <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="fileUpload($event)" accept="image/png,image/jpg,image/jpeg" required/>
+                    <button mat-raised-button matTooltip="Dozvoljeni tip slike je JPG, JPEG, PNG" class=".example-tooltip-red" class="uploadFileButton" (click)="csvInput.click()"> 
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                </td>
+              <!-- <td colspan="2">
+                <input type="file" id="file" (change)="handleFileInput($event.target.files)"> 
+              </td> -->
+            </tr>
+          </table>
+        </form>
+        
+      </mat-step>
+    </mat-horizontal-stepper>
+        </mat-card-content>
+        <mat-card-actions>
+            
+            <div class="centeredDiv" *ngIf='compThirdAndFourth'>
+               
+                <button color="primary" mat-raised-button class="buttonColored"  [disabled]="!fifthForm.valid" (click)="registration(stepper)">Registruj me</button>
+            </div>
+        </mat-card-actions>
+        
+</mat-card>
+</div>
+
+

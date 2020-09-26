@@ -1,0 +1,61 @@
+
+
+.mat-tab-group{
+    font-size: 15px;
+    /* background-color:#fffbe9; */
+    background-color: mintcream;
+    height: 100%;
+}
+
+.mat-tab-labels
+{
+    padding: 0px !important; 
+   /* background-color: red; */
+    
+}
+
+.mat-tab-label{
+    min-width: 25px !important;
+    padding: 5px;
+    background-color:#FCA311;
+    color: #14213d;
+    font-weight: 700;
+    font-size: 15px;
+   
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+    height: 5px;
+  } 
+
+.centeredDiv
+{
+    text-align : center;
+}
+
+mat-grid-tile
+{
+    background:mintcream;
+}
+
+.classImage1
+{
+    height: 200px;
+    width:300px;
+    background-size: cover;
+}
+   
+
+.centeredCard
+{
+    margin: auto;
+    margin-top: 8%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 5%;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid;
+    border-color: #1d3557;
+    background-color: mintcream;
+}

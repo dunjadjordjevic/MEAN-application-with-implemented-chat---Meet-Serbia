@@ -1,0 +1,143 @@
+
+.chat-messages-show-container{
+    background: mintcream;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+  }
+  .chat-messages-show-list {
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+  }
+  .chat-messages-create-container{
+    background: #14213D;
+    height: 100px;
+    margin-left:25%;
+    margin-right:25%;
+    margin-bottom:10px;
+    display: flex;
+    border-style: double;
+    border-color: #14213D ;
+    justify-content: center;
+  }
+  .chat-messages-create-input {
+    padding: 12px;
+    margin: 29px 30px;
+    flex:2
+  }
+  
+  .chatButton
+  {
+    height: 50px;
+    margin-top: 20px;
+    margin-right: 10px;
+    background-color: mintcream;
+    color: #14213D;
+  }
+  .centeredDiv
+  {
+    text-align: center;
+  }
+  
+  .centeredCard
+  {
+    margin-top:10%;
+    margin-bottom: 10%;
+    margin-left: 25%;
+    margin-right: 25%;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+  }
+  
+  
+  mat-grid-tile
+  {
+      background: mintcream;
+  }
+  
+  
+  .mat-tab-group{
+    font-size: 15px;
+    background-color:mintcream;
+  }
+
+  .container
+  {
+      margin-left:20%;
+      margin-right: 20%;
+      background-color: #14213D ;
+      width: 800px;
+      height: 500px;
+  }
+
+  .userList
+  {
+    width: 25%;
+    height: 100%;
+    background-color: mintcream;
+    border-color: #14213D;
+    border-style: double;
+    border-width: 2px;
+    overflow: scroll;
+  }
+
+  .messages
+  {
+  
+    background-color: mintcream;
+    border-color: #14213D;
+    border-style: double;
+    border-width: 2px;
+    overflow: scroll;
+  }
+
+  .usernameShow
+  {
+    color: #14213D;
+    font-size:20px;
+    font-weight: bold;
+    width: 100%;
+    height: 50px;
+    text-align:center;
+  }
+
+  .listForm
+  {
+    width:100%;
+    height: 100%;
+  }
+
+  .listOption
+  {
+    text-align:center;
+    width:100%;
+    height: 100%;
+  }
+
+  .buttonList
+  {
+    width: 100%;
+    height: 50px;
+    text-align:center;
+  }
+
+  .centeredDiv
+  {
+    text-align: center;
+  }
+
+  .maxSpan
+  {
+    width: 100%;
+    text-align: justify;
+    font-size: 15px;
+  }
+
+  .obliqueParagraph
+  {
+    font-style: oblique;
+  }

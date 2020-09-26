@@ -1,0 +1,62 @@
+
+.centeredDiv
+{
+    text-align: center;
+}
+
+.adDescriptionCard
+{
+    margin-top: 5%;
+    height: 400px;
+    background-color: whitesmoke;
+    color: rgb(68, 65, 65);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+
+.coloredDiv
+{
+    /* background-color: #fbc17e; */
+    height: 300px;
+    width: 100%;
+    overflow:auto;
+}
+
+td {
+    width: 600px;
+
+}
+
+.nameColumnTD {
+    width: 200px;
+
+}
+
+.buttonTD
+{
+    width: 150px;
+}
+
+.editTD {
+    width: 180px;
+}
+
+
+
+.mat-card-content 
+{
+    justify-content: center;
+}
+
+.classImage
+{
+    height: 200px;
+    width: 200px;
+}
+
+
+
+/* td:hover {
+    background-color:  #ffb056cc;
+  } */

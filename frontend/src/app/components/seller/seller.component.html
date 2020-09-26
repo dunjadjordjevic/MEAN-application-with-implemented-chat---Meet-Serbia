@@ -1,0 +1,158 @@
+<!-- <div>
+    Ulogovani korisnik je: {{loggedUser.username}}
+</div> -->
+
+<mat-tab-group mat-align-tabs="end">
+   
+    <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon color="primary" class="example-tab-icon">book_online</mat-icon>
+         &nbsp;
+          Moji oglasi
+        </ng-template>
+        <!-- Iscrtavanje mojih oglasa -->
+        <div class="rightDiv">
+          <button mat-fab color="primary"  aria-label="delete ad" (click)="addAd()">
+            <mat-icon >add_circle_outline</mat-icon>
+          </button>
+        </div>
+        
+        <div class="centeredDiv">
+         
+         
+              
+              <br>
+              <mat-button-toggle-group name="buttonChooseTypeOfAdsToShow" appearance="legacy" #group="matButtonToggleGroup" [value]="buttonChooseTypeOfAdsToShow" (change)="onValChange(group.value)">
+                <mat-button-toggle color="primary" value="accommodationAd" (click)="checkNullArrayOfAds()">Oglasi za smeštaj</mat-button-toggle>
+                <mat-button-toggle color="primary" value="productAd" (click)="checkNullArrayOfAds()">Oglasi za proizvode</mat-button-toggle>
+              </mat-button-toggle-group>
+          
+        </div>
+        <span *ngIf="buttonChooseTypeOfAdsToShow != 'productAd' && buttonChooseTypeOfAdsToShow != 'accommodationAd' ">
+          <div class="emptyDiv">
+
+          </div>
+        </span>
+        <span *ngIf="buttonChooseTypeOfAdsToShow == 'productAd'">
+          <span *ngIf="myProductAds.length!=0">
+            <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid"> 
+              <div fxFlex="25%" *ngFor="let productAd of myProductAds">
+                  <mat-card  class="mat-elevation-z4" >
+                  <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"  style='background-image: url(http://localhost:4000/uploads/profilePictures/{{productAd.ownerUsername}}.jpg)'></div>
+                      <mat-card-title>  {{productAd.nameOfAd}} </mat-card-title> <br>
+                      <mat-card-subtitle> Datum postavljanja: {{productAd.dateOfPost}} </mat-card-subtitle>
+                  </mat-card-header>
+      
+                  <!-- http://localhost:4000/uploads/ads/productAds/livadskimed.jpg -->
+                  <img mat-card-image src="{{productAd.pictureOfAd}}.jpg" alt='slika za oglas'>
+                  <mat-card-content>
+                      <p>
+                          {{productAd.description}}
+                      </p>
+                  </mat-card-content>
+      
+                  <mat-card-actions>
+                      <div>
+                        <span *ngIf="productAd.approvedByAdmin">
+                          <button mat-mini-fab color="warn" aria-label="delete ad" (click)="deleteAd(productAd._id, 'productAd')">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </span>
+                        <span *ngIf="!productAd.approvedByAdmin">
+                          <button mat-mini-fab color="warn" aria-label="ad is not approved, yet" >
+                            <mat-icon>hourglass_empty</mat-icon>
+                          </button>
+                        </span>
+                       
+                        <div fxFlex></div>
+                        <button mat-raised-button color="primary" (click)="seeAd(productAd._id, 'productAd')"> Pregledaj oglas </button>
+                      </div>
+                  </mat-card-actions>
+                  </mat-card>
+              </div>
+            </div>
+          </span>
+        </span>
+        <span *ngIf="buttonChooseTypeOfAdsToShow == 'accommodationAd'">
+          <span *ngIf="myAccommodationAds.length!=0">
+            <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid"> 
+              <div fxFlex="25%" *ngFor="let accommodationAd of myAccommodationAds">
+                  <mat-card  class="mat-elevation-z4" >
+                  <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"  style='background-image: url(http://localhost:4000/uploads/profilePictures/{{accommodationAd.ownerUsername}}.jpg)'></div>
+                      <mat-card-title>  {{accommodationAd.nameOfAd}} </mat-card-title> <br>
+                    <mat-card-subtitle> Datum postavljanja: {{accommodationAd.dateOfPost}} </mat-card-subtitle>
+                  </mat-card-header>
+      
+                  <!-- http://localhost:4000/uploads/ads/productAds/livadskimed.jpg -->
+                  <img mat-card-image src="{{accommodationAd.pictureOfAd}}.jpg" alt='slika za oglas'>
+                  <mat-card-content>
+                      <p>
+                          {{accommodationAd.description}}
+                      </p>
+                  </mat-card-content>
+      
+                  <mat-card-actions>
+                      <div >
+                        <span *ngIf="accommodationAd.approvedByAdmin">
+                          <button mat-mini-fab color="warn" aria-label="delete ad" (click)="deleteAd(accommodationAd._id, 'accommodationAd')">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </span>
+                        <span *ngIf="!accommodationAd.approvedByAdmin">
+                          <button mat-mini-fab color="warn" aria-label="ad is not approved, yet" >
+                            <mat-icon>hourglass_empty</mat-icon>
+                          </button>
+                        </span>
+                        
+                        <div fxFlex></div>
+                        <button mat-raised-button color="primary" (click)="seeAd(accommodationAd._id, 'accommodationAd')"> Pregledaj oglas </button>
+                      </div>
+                  </mat-card-actions>
+                  </mat-card>
+              </div>
+            </div>
+          </span>
+        </span>
+        
+        
+
+
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon color="primary" class="example-tab-icon">person_outline</mat-icon>
+         &nbsp;
+          Moj profil
+        </ng-template>
+        <br>
+        <br>
+        <div class="centeredDiv">
+          <a routerLink='/see-profile' [queryParams]="{ username: loggedUser.username}"> Da li želite da izmenite svoj profil? </a>
+          <app-see-profile></app-see-profile>
+        </div>
+       
+        
+    </mat-tab>
+
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon color="primary" class="example-tab-icon">dashboard</mat-icon>
+                &nbsp;
+                Pregled oglasa
+        </ng-template>
+        <app-choose-for-me></app-choose-for-me>
+  </mat-tab>
+
+    
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="primary" class="example-tab-icon">close</mat-icon>
+        <button mat-button (click)=logOut()> Odjavi se </button>
+      </ng-template>
+  </mat-tab>
+
+</mat-tab-group>

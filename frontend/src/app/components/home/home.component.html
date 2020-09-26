@@ -1,0 +1,55 @@
+<mat-grid-list cols="5" rowHeight="200px" >
+  <mat-grid-tile>
+    <img class="classImage1"  src="assets/zlatibor.jpg" alt='slika'> 
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <img class="classImage1"  src="assets/sumarice.jpg" alt='slika'> 
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <img class="classImage1"  src="assets/sar_planina.jpg" alt='slika'> 
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <img class="classImage1"  src="assets/uvac_reka.jpg" alt='slika'> 
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <img class="classImage1"  src="assets/drina.jpg" alt='slika'>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-tab-group mat-align-tabs="end">
+  <mat-tab label="Početna"> 
+    <div class="centeredDiv">
+      <mat-card class="centeredCard">
+        <mat-card-title>
+          Dobro došli! 
+        </mat-card-title>
+        <mat-card-subtitle>
+          na sajt Upoznaj Srbiju 
+        </mat-card-subtitle>
+        <mat-card-content>
+          <p>
+            Na našem sajtu možete naći informacije o oglasima vezanim za smeštaj na destinacijama širom Srbije, kao i o oglasima za domaće proizvode.
+            Kako biste uživali u potpunosti na našem sajtu, registrujte se - kao <strong> kupac </strong> ako želite da pretražujete oglase 
+            ili kao <strong> prodavac </strong> ako želite da postavljate oglase. <br>
+            Ove godine mnogi od Vas planiraju da svoj odmor provedu u našoj zemlji, pa smo mi želeli da Vam omogućimo da što lakše i brže 
+            pretražite smeštajne kapacitete koji se oglašavaju kod nas.  <br><br>
+            Ako ste pak ljubitelji domaćih proizvoda, ovde možete pronaći i to! <br> <br>
+            Mi smo tu za Vas! <br>
+            Kako bismo bili sigurni da ste u potpunosti dobili sve Vama potrebne informacije,  osnovali smo sekciju <strong>Podrška za kupce</strong>
+            koja je namenjena svim kupcima koji žele da dobiju više informacija od strane naših administratora. Budite slobodni i kontaktirajte nas!
+
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="Prijavi se"> 
+    <app-login></app-login>
+  </mat-tab>
+  <mat-tab label="Registruj se" > 
+    <app-registration></app-registration>
+  </mat-tab>
+  <mat-tab label="Biraj za mene!"> 
+    <app-choose-for-me></app-choose-for-me>
+  </mat-tab>
+</mat-tab-group>
+

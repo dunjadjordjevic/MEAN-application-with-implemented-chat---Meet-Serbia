@@ -1,0 +1,51 @@
+.centeredDiv
+{
+    justify-content: center;
+    text-align: center;
+}
+
+.mat-card-header{
+    justify-content: center;
+}
+
+.centeredCard
+{
+    margin: auto;
+    margin-top: 4%;
+    margin-left: 20%;
+    margin-right: 20%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    border-style: outset;
+    margin-bottom:5%;
+    background-color: mintcream;
+}
+
+.centeredTable
+{
+    margin: 0 auto;
+}
+
+.mat-card-title
+{
+    color: primary;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.mat-card-content {
+    font-size: 15px;
+}
+
+mat-form-field {
+   
+    color: primary;
+    
+ }
+
+ .classImage
+ {
+    height: 150px;
+    width:150px;
+ }

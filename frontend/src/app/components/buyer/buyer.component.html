@@ -1,0 +1,44 @@
+<mat-tab-group mat-align-tabs="end">
+   
+    
+    <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon color="primary" class="example-tab-icon">book_online</mat-icon>
+         &nbsp;
+          Pretraga oglasa
+        </ng-template>
+        <div class="divWithoutTransition">
+          <app-choose-for-me></app-choose-for-me>
+        </div>
+       
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="primary" class="example-tab-icon">book_online</mat-icon>
+       &nbsp;
+        Moj profil
+      </ng-template>
+      <div class="centeredDiv">
+        
+        <a routerLink='/see-profile' [queryParams]="{ username: loggedUser.username}"> Da li želite da izmenite svoj profil? </a>
+ 
+        <app-see-profile></app-see-profile>
+      </div>
+  </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon color="primary" class="example-tab-icon">mail</mat-icon>
+         &nbsp;
+          Podrška za kupce 
+        </ng-template>
+       <app-buyer-chat></app-buyer-chat>
+    </mat-tab>
+    
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="primary" class="example-tab-icon">close</mat-icon>
+        <button mat-button (click)=logOut()> Odjavi se </button>
+      </ng-template>
+  </mat-tab>
+</mat-tab-group>
+

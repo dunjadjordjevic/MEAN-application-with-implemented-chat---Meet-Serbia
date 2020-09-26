@@ -1,0 +1,19 @@
+@font-face 
+{
+    font-family: fontForTitle;
+    
+    src: url('../assets/Monoton-Regular.ttf');
+}
+
+
+.titleOfApplication
+{
+    font-family: fontForTitle;
+    font-size: 30px;
+    color: #fca311;
+}
+
+.mat-toolbar {
+   /* background-color: #1565c0; */
+   background-color: #14213D;
+}

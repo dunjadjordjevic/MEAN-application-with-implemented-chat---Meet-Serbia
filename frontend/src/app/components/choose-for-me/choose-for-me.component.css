@@ -1,0 +1,96 @@
+
+.centeredDiv {
+  text-align: center; 
+}
+
+.centeredTable
+{
+  justify-content: center;
+  text-align: center;
+  width:100%;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.content {
+  padding: 16px;
+}
+
+.content > mat-card {
+  width: 200px;
+} 
+ 
+ .mat-card-title, .mat-card-header {
+  text-align: center;
+  justify-content: center;
+  font-size: medium;
+} 
+
+.mat-card-subtitle
+{
+  text-align: center;
+  justify-content: center;
+  font-size: small;
+
+}
+
+.filterCard
+{
+  /*background-color:rgb(250, 244, 210);*/
+  background-color: #fffbe9;
+  margin-left: 25%;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+img
+{
+  background-size: cover;
+  /* height: 200px;
+  width: 200px;
+  border-style: ridge;
+  border-color: black;
+  margin-left: 40px; */
+}
+ .mat-card {
+  /* padding: 0 !important; */
+  /* background-color: #fffcf2; */
+  background-color: #e1e5ee;
+} 
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.mat-slider {
+  width: 200px;
+}
+
+mat-card img{
+  object-fit: cover; /*this makes the image in src fit to the size specified below*/
+  /*width: 100%; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+  height: 200px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.mat-button-toggle {
+  background-color: mintcream;
+  color: #14213D;
+}
+
+.mat-button-toggle-checked {
+  background-color: mintcream;
+  border-style: double;
+  color: #14213D;
+}

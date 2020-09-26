@@ -1,0 +1,60 @@
+@font-face 
+{
+    font-family: fontForLogInTitle;
+    
+    src: url('/frontend/src/assets/LaBelleAurore-Regular.ttf');
+}
+
+.mat-card-header{
+    justify-content: center;
+}
+
+.centeredCard
+{
+    margin: auto;
+    margin-top: 8%;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-bottom: 5%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid;
+    border-style: outset;
+    background-color: mintcream;
+    border-color: #14213D;
+}
+
+.centeredTable
+{
+    margin: 0 auto;
+}
+
+.centeredDiv
+{
+    text-align: center;
+}
+
+.buttonColored
+{
+    font-size: 15px;
+    text-align: center;
+    background-color: #14213D;
+    color: mintcream;
+}
+
+.mat-card-title
+{
+    color: primary;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.mat-card-content {
+    font-size: 15px;
+}
+
+mat-form-field {
+   
+    color: primary;
+    
+ }

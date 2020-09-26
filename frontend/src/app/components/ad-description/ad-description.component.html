@@ -1,0 +1,173 @@
+
+<div class="centeredDiv">
+    
+    <mat-card class="adDescriptionCard"> 
+        <mat-card-title>
+            PREGLED OGLASA 
+        </mat-card-title>
+        <mat-card-subtitle>
+            "{{myAd.nameOfAd}}" <br>
+            Datum postavljanja: {{myAd.dateOfPost}}
+        </mat-card-subtitle>
+        <mat-card-content>
+
+            <span *ngIf="typeOfAd== 'productAd'">
+                <div class="coloredDiv">
+                    <form #formForProductAd="ngForm">
+                    <table >
+                        <tr>
+                            <td > OPIS OGLASA: </td>
+                           
+                            <td > {{myAd.description}} </td>
+                            <td *ngIf="loggedUser.typeOfUser!='buyer'"  class="editTD">   
+                                <mat-form-field>
+                                    <input matInput name="description"  [(ngModel)]="newDescription" placeholder="Unesite izmenu">
+                                </mat-form-field> 
+                            </td>
+                            <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('description')" [disabled]="!myAd.approvedByAdmin || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                            <td rowspan="5"> 
+                                <img mat-card-image class="classImage" src="{{myAd.pictureOfAd}}.jpg" alt='slika za oglas'> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> SASTAV PROIZVODA: </td>
+                            <td >{{myAd.structureOfProduct}}</td>
+                            <td  *ngIf="loggedUser.typeOfUser!='buyer'"  class="editTD">   
+                                <mat-form-field>
+                                    <input matInput name="structureOfProduct"  [(ngModel)]="newStructureOfProduct" placeholder="Unesite izmenu">
+                                </mat-form-field> 
+                            </td>
+                            <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('structureOfProduct')" [disabled]="!myAd.approvedByAdmin  || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                            
+                        </tr>
+                        <tr>
+                            <td>TEŽINA PROIZVODA (kg):</td>
+                            <td >{{myAd.weight}}</td>
+                            <td  *ngIf="loggedUser.typeOfUser!='buyer'"  class="editTD">   
+                                <mat-form-field>
+                                    <input matInput name="weight"  [(ngModel)]="newWeight" placeholder="Unesite izmenu">
+                                </mat-form-field> 
+                            </td>
+                            <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('weight')" [disabled]="!myAd.approvedByAdmin  || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                        </tr>
+                        <tr>
+                            <td>CENA:</td>
+                            <td >{{myAd.price}}</td>
+                            <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="editTD">   
+                                <mat-form-field>
+                                    <input matInput name="price"  [(ngModel)]="newPrice" placeholder="Unesite izmenu">
+                                </mat-form-field> 
+                            </td>
+                            <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('price')" [disabled]="!myAd.approvedByAdmin  || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                TIP PROIZVODA:
+                            </td>
+                            <td colspan="3">
+                                <mat-chip-list>
+                                    <mat-chip  *ngFor="let type of myAd.typeOfProduct">
+                                    {{type}}
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </td>
+                            <td class="editTD">
+
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </form>
+                </div>  
+            </span>
+
+            <!-- if type of ad is accommodationAd show other properties -->
+            <span *ngIf="typeOfAd == 'accommodationAd'">
+                <div class="coloredDiv">
+                    <form #formForAccommodationAd="ngForm">
+                        <table>
+                            <tr>
+                                <td  class="nameColumnTD"> OPIS OGLASA: </td>
+                               
+                                <td > {{myAd.description}} </td>
+                                <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="editTD">   
+                                    <mat-form-field>
+                                        <input matInput name="description"  [(ngModel)]="newDescription" placeholder="Unesite izmenu">
+                                    </mat-form-field> 
+                                </td>
+                                <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('description')" [disabled]="!myAd.approvedByAdmin  || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                                <td rowspan="5"> 
+                                    <!-- OVDE IDE SLIKA -->
+                                    <img mat-card-image class="classImage" src="{{myAd.pictureOfAd}}.jpg" alt='slika za oglas'> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="nameColumnTD">CENA:</td>
+                                <td >{{myAd.price}}</td>
+                                <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="editTD">   
+                                    <mat-form-field>
+                                        <input matInput name="price"  [(ngModel)]="newPrice" placeholder="Unesite izmenu">
+                                    </mat-form-field> 
+                                </td>
+                                <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('price')" [disabled]="!myAd.approvedByAdmin  || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                            </tr>
+                            <tr>
+                                <td class="nameColumnTD"> VRSTA SMEŠTAJA: </td>
+                                <td >
+                                    <mat-form-field color="primary">
+                                        <mat-label>Vrsta smeštaja</mat-label>
+                                        <mat-select  [(ngModel)]="newTypeOfAccommodation" name="typeOfAccommodationList" multiple >
+                                          <mat-option *ngFor="let typeOfAccommodation of typeOfAccommodationsList" [value]="typeOfAccommodation">{{typeOfAccommodation}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </td>
+                                <td>
+                                </td>
+                                <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('typeOfAccommodation')" [disabled]="!myAd.approvedByAdmin  || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                                
+                            </tr>
+                            <tr>
+                                <!-- newTypeOfAccommodation {{newTypeOfAccommodation}} -->
+                                <td class="nameColumnTD"> TIP USLUGE: </td>
+                                <td >
+                                    <mat-form-field color="primary">
+                                        <mat-label>Tip usluge</mat-label>
+                                        <mat-select  [(ngModel)]="newTypeOfService" name="typeOfServicesList" multiple>
+                                            <mat-option *ngFor="let typeOfService of typeOfServicesList" [value]="typeOfService">{{typeOfService}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                </td>
+                                <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('typeOfService')" [disabled]="!myAd.approvedByAdmin  || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                            </tr>
+                            <tr>
+                                <!-- newTypeOfAccommodation {{newTypeOfAccommodation}} -->
+                                <td class="nameColumnTD"> OPREMLJENOST: </td>
+                                <td >
+                                    <mat-form-field color="primary">
+                                        <mat-label>Opremljenost</mat-label>
+                                        <mat-select  [(ngModel)]="newEquipment" name="equipmentList" multiple>
+                                            <mat-option *ngFor="let equipment of equipmentList" [value]="equipment">{{equipment}}</mat-option>
+                                        </mat-select>
+                                        </mat-form-field>
+                                </td>
+                                <td>
+                                </td>
+                                <td  *ngIf="loggedUser.typeOfUser!='buyer'" class="buttonTD"> <button mat-raised-button  (click)="changeProperty('equipment')" [disabled]="!myAd.approvedByAdmin  || loggedUser.username!=myAd.ownerUsername"> Izmeni </button></td>
+                            </tr>
+                            
+                        </table>
+                    </form>
+                </div>
+            </span>
+
+        </mat-card-content>
+        <mat-card-actions>
+            
+        </mat-card-actions>
+    </mat-card>
+    
+    <button mat-raised-button color="primary" (click)='backClicked()'>Nazad</button>
+
+</div>

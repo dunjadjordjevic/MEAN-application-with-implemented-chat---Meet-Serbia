@@ -1,0 +1,35 @@
+<!-- 
+<div>
+  Odaberite kupca sa kojim želite da komunicirate: 
+  <form #formSelectBuyer="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Kupci</mat-label>
+      <mat-select name="usernames" [(ngModel)]="selectedUsername">
+        <mat-option *ngFor="let buyer of usersBuyers" value="buyer"> {{buyer.username}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  
+
+ </div>  -->
+<!-- <div *ngIf='usersBuyers'>
+  <div *ngFor='let userB of usersBuyers'>
+    {{userB.username}}
+  </div>
+</div> -->
+
+<div class="chat-messages">
+  <div class="chat-messages-show-container">
+     <ul id="message-list" class="chat-messages-show-list">
+    </ul>
+    <!-- <div *ngFor="let message of messages">
+      <ul id="message-list" class="chat-messages-show-list">  {{message}} </ul>
+    </div> -->
+  </div>
+  <div class="chat-messages-create-container"> 
+    <input class="chat-messages-create-input" type="text" name="message" [(ngModel)]="message">
+    <button mat-raised-button class="chatButton" (click)="sendMessage()"> Pošalji poruku </button>
+    <button mat-raised-button class="chatButton" (click)="endConversation()"> Završi konverzaciju </button>
+  </div>
+</div> 
+

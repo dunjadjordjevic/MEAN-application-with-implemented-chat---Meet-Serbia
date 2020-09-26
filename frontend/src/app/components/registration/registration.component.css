@@ -1,0 +1,58 @@
+.centeredCard 
+{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.buttonColored
+{
+
+    font-size: 15px;
+    text-align: center;
+}
+
+.centeredDiv 
+{
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.centeredTable
+{
+    margin: 0 auto;
+}
+
+.uploadFileButton
+{
+    color: #ff9925;
+    background-color: #1565c0 ;
+    
+}
+
+.registrationCard
+{
+    
+    border: 1px solid;
+    border-style: outset;
+    background-color: mintcream;
+    border-color: #14213D;
+}
+
+mat-horizontal-stepper {
+    background-color: mintcream; 
+ }
+
+.centeredTitle
+ {
+    text-align: center;
+    justify-content: center;
+ }
+
+
+

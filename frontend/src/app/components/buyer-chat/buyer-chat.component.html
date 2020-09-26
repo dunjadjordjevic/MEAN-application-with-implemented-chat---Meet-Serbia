@@ -1,0 +1,15 @@
+<div class="chat-messages">
+  <div class="chat-messages-show-container">
+    <ul id="message-list" class="chat-messages-show-list">
+    </ul>
+    <!-- <div *ngFor="let message of messages">
+      <ul id="message-list" class="chat-messages-show-list">  {{message}} </ul>
+    </div> -->
+  </div>
+  <div class="chat-messages-create-container"> 
+    <input class="chat-messages-create-input" plaçeholder="Unesite tekst poruke..." type="text" [(ngModel)]="message">
+    <button mat-raised-button class="chatButton" (click)="sendMessage()"> Pošalji poruku </button>
+  </div>
+</div>
+
+

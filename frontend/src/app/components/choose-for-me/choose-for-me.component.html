@@ -1,0 +1,337 @@
+<div class="centeredDiv">
+<p>
+    <br>
+    <mat-button-toggle-group name="buttonChooseTypeOfAdsToShow" appearance="legacy" #group="matButtonToggleGroup" [value]="buttonChooseTypeOfAdsToShow" (change)="onValChange(group.value)">
+      <mat-button-toggle value="accommodationAd">Oglasi za smeštaj</mat-button-toggle>
+      <mat-button-toggle value="productAd">Oglasi za proizvode</mat-button-toggle>
+    </mat-button-toggle-group>
+</p>
+</div>
+
+<span *ngIf="buttonChooseTypeOfAdsToShow == 'productAd'">
+
+    <!-- only buyers can filter ads  -->
+    <span  *ngIf=" loggedUser!=null && loggedUser.typeOfUser=='buyer'">
+        <br> 
+        <div class="centeredDiv">
+            <mat-card class="filterCard">
+                <mat-card-header>
+                    <mat-card-title>
+                        Pretraga oglasa pomoću filtera
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        Odaberite u navedenim poljima šta želite da ponuda sadrži. <br> U nastavku će Vam biti prikazani oni oglasi koji se podudaraju sa Vašom pretragom. <br>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <br>
+                    <form #filterForm="ngForm" >
+                        <table class="centeredTable">
+                            <tr >
+                                <td>
+                                    <mat-form-field >
+                                        <input matInput type="text" placeholder="Naziv oglasa"  name="nameOfAd" [formControl]="myControlNameOfAd" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredProdNameOptions | async" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                   &nbsp;
+                                    <mat-form-field >
+                                        <mat-label>Tip proizvoda</mat-label>
+                                        <mat-select name="types" [(ngModel)]="filterProductAd.typeOfProduct"  multiple >
+                                            <mat-option *ngFor="let type of typesOfProduct" [value]="type">{{type}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td> 
+                                <td>
+                                    Cena: <br>
+                                    <mat-slider thumbLabel  [(ngModel)] = "valueOfPriceSlider" name="priceSlider" min="1" max="10000"></mat-slider>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <button mat-button color="primary" (click)="deleteFilters()">Obriši filtere</button>
+                                    <button mat-button color="primary" (click)="showFilteredAds('productAd')">Primeni filter</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </mat-card-content>
+                
+            </mat-card>
+            
+        </div>
+    </span>
+
+   
+
+    <span *ngIf="!filterOn">
+        <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid"> 
+        
+            <div fxFlex="25%"  *ngFor="let productAd of allProductAds">
+                
+                <mat-card  class="mat-elevation-z4" >
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"  style='background-image: url(http://localhost:4000/uploads/profilePictures/{{productAd.ownerUsername}}.jpg)'></div>
+                    <mat-card-title>  {{productAd.nameOfAd}} </mat-card-title> <br>
+                    <mat-card-subtitle>
+                        <span *ngIf="loggedUser!=null && loggedUser.typeOfUser=='buyer'"> 
+                            Oglas postavio:
+                            <a [routerLink]="['/see-profile']" [queryParams]="{ username: productAd.ownerUsername}"> 
+                                 {{productAd.ownerUsername}} 
+                            </a> 
+                        </span>
+                       <span *ngIf="loggedUser!=null && loggedUser.typeOfUser!='buyer'">
+                        Oglas postavio: {{productAd.ownerUsername}}
+                       </span>
+                        <br> Datum postavljanja: {{productAd.dateOfPost}} 
+                    </mat-card-subtitle>
+                </mat-card-header>
+    
+                <!-- http://localhost:4000/uploads/ads/productAds/livadskimed.jpg -->
+                <img mat-card-image src="{{productAd.pictureOfAd}}.jpg" alt='slika za oglas'>
+                <mat-card-content>
+                    <p>
+                        {{productAd.description}}
+                    </p>
+                </mat-card-content>
+    
+                <mat-card-actions>
+                    <div class="centeredDiv">
+                        <button mat-raised-button color="primary"  (click)="showAd('productAd', productAd._id)"> Pregledaj oglas </button>
+                    </div>
+                    
+                </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </span>
+    <span *ngIf="filterOn">
+        <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid"> 
+        
+            <div fxFlex="25%"  *ngFor="let productAd of filteredProductAds">
+                
+                <mat-card  class="mat-elevation-z4" >
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"  style='background-image: url(http://localhost:4000/uploads/profilePictures/{{productAd.ownerUsername}}.jpg)'></div>
+                   
+                    <mat-card-title>  {{productAd.nameOfAd}} </mat-card-title> <br>
+                    <mat-card-subtitle>
+                        <span *ngIf="loggedUser!=null && loggedUser.typeOfUser=='buyer'"> 
+                            Oglas postavio:
+                            <a [routerLink]="['/see-profile']" [queryParams]="{ username: productAd.ownerUsername}"> 
+                                   {{productAd.ownerUsername}} 
+                            </a> 
+                        </span>
+                       <span *ngIf="loggedUser!=null && loggedUser.typeOfUser!='buyer'">
+                        Oglas postavio:  {{productAd.ownerUsername}}
+                       </span>
+                        <br> Datum postavljanja: {{productAd.dateOfPost}} </mat-card-subtitle>
+                </mat-card-header>
+    
+                <!-- http://localhost:4000/uploads/ads/productAds/livadskimed.jpg -->
+                <img mat-card-image src="{{productAd.pictureOfAd}}.jpg" alt='slika za oglas'>
+                <mat-card-content>
+                    <p>
+                        {{productAd.description}}
+                    </p>
+                </mat-card-content>
+    
+                <mat-card-actions>
+                    <div class="centeredDiv">
+                        <button mat-raised-button color="primary"  (click)="showAd('productAd', productAd._id)"> Pregledaj oglas </button>
+                    </div>
+                    
+                </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
+    </span>
+    
+
+</span>
+
+<span *ngIf="buttonChooseTypeOfAdsToShow == 'accommodationAd'">
+
+    <span  *ngIf="loggedUser!=null && loggedUser.typeOfUser=='buyer'">
+        <br> 
+        <div class="centeredDiv">
+            <mat-card class="filterCard">
+                <mat-card-header>
+                    <mat-card-title>
+                        Pretraga oglasa pomoću filtera
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        Odaberite u navedenim poljima šta želite da ponuda sadrži. <br> U nastavku će Vam biti prikazani oni oglasi koji se podudaraju sa Vašom pretragom. <br>
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <br>
+                    <form #filterForm2="ngForm" >
+                        <table class="centeredTable">
+                            <tr>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput type="text" placeholder="Naziv oglasa"  name="nameOfAd" [formControl]="myControlNameOfAd" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let option of filteredAccNameOptions | async" [value]="option">
+                                            {{option}}
+                                        </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field > 
+                                        Destinacija: <br>
+                                        <input matInput type="text"  name="destination" [(ngModel)]="filterDestination" >
+                                    </mat-form-field>
+                                </td> 
+                                <td>
+                                    Cena: <br>
+                                    <mat-slider thumbLabel  [(ngModel)] = "valueOfPriceSlider" name="priceSlider"  min="1" max="100"></mat-slider>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                     <mat-form-field >
+                                         <mat-label>Vrsta smeštaja</mat-label>
+                                         <mat-select name="typesOfAccommodation" [(ngModel)]="filterAccommodationAd.typeOfAccommodation"  multiple >
+                                             <mat-option *ngFor="let type of typesOfAccommodation" [value]="type">{{type}}</mat-option>
+                                         </mat-select>
+                                     </mat-form-field>
+                                 </td> 
+                                 <td>
+                                    &nbsp;
+                                     <mat-form-field >
+                                         <mat-label>Tip usluge</mat-label>
+                                         <mat-select name="typeOfService" [(ngModel)]="filterAccommodationAd.typeOfService"  multiple >
+                                             <mat-option *ngFor="let type of typesOfService" [value]="type">{{type}}</mat-option>
+                                         </mat-select>
+                                     </mat-form-field>
+                                 </td> 
+                                 <td>
+                                    &nbsp;
+                                     <mat-form-field >
+                                         <mat-label>Opremljenost</mat-label>
+                                         <mat-select name="equipment" [(ngModel)]="filterAccommodationAd.equipment"  multiple >
+                                             <mat-option *ngFor="let type of equipments" [value]="type">{{type}}</mat-option>
+                                         </mat-select>
+                                     </mat-form-field>
+                                 </td> 
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <button mat-button color="primary" (click)="deleteFilters()">Obriši filtere</button>
+                                    <button mat-button color="primary" (click)="showFilteredAds('accommodationAd')">Primeni filter</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </mat-card-content>
+                
+            </mat-card>
+            
+        </div>
+    </span>
+
+    <span *ngIf='filterOn'>
+        <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid"> 
+            <div fxFlex="25%" *ngFor="let accommodationAd of filteredAccommodationAds">
+                <mat-card  class="mat-elevation-z4" >
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"  style='background-image: url(http://localhost:4000/uploads/profilePictures/{{accommodationAd.ownerUsername}}.jpg)'></div>
+                    <mat-card-title>  {{accommodationAd.nameOfAd}} </mat-card-title> <br>
+                    <mat-card-subtitle>
+
+                        <span *ngIf="loggedUser!=null && loggedUser.typeOfUser=='buyer'"> 
+                            Oglas postavio:
+                            <a [routerLink]="['/see-profile']" [queryParams]="{ username: accommodationAd.ownerUsername}"> 
+                                  {{accommodationAd.ownerUsername}} 
+                            </a> 
+                        </span>
+                       <span *ngIf="loggedUser!=null && loggedUser.typeOfUser!='buyer'">
+                        Oglas postavio: {{accommodationAd.ownerUsername}}
+                       </span>
+                        
+                        <br> Datum postavljanja: {{accommodationAd.dateOfPost}} 
+                    </mat-card-subtitle>
+                </mat-card-header>
+
+              
+                <img mat-card-image src="{{accommodationAd.pictureOfAd}}.jpg" alt='slika za oglas'>
+                <mat-card-content>
+                    <p>
+                        {{accommodationAd.description}}
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <div class="centeredDiv">
+                        <button mat-raised-button color="primary" (click)="showAd('accommodationAd', accommodationAd._id)"> Pregledaj oglas </button>
+                    </div>
+                    
+                </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
+    </span>
+
+    <span *ngIf='!filterOn'>
+        <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid"> 
+            <div fxFlex="25%" *ngFor="let accommodationAd of allAccommodationAds">
+                <mat-card  class="mat-elevation-z4" >
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"  style='background-image: url(http://localhost:4000/uploads/profilePictures/{{accommodationAd.ownerUsername}}.jpg)'></div>
+                    <mat-card-title>  {{accommodationAd.nameOfAd}} </mat-card-title> <br>
+                    <mat-card-subtitle>
+                        
+                        <span *ngIf="loggedUser!=null && loggedUser.typeOfUser=='buyer'"> 
+                            Oglas postavio:
+                            <a [routerLink]="['/see-profile']" [queryParams]="{ username: accommodationAd.ownerUsername}"> 
+                                 {{accommodationAd.ownerUsername}} 
+                            </a> 
+                        </span>
+                       <span *ngIf="loggedUser!=null && loggedUser.typeOfUser!='buyer'">
+                        Oglas postavio: {{accommodationAd.ownerUsername}}
+                       </span>
+                        <br> Datum postavljanja: {{accommodationAd.dateOfPost}} 
+                    </mat-card-subtitle>
+                </mat-card-header>
+
+              
+                <img mat-card-image src="{{accommodationAd.pictureOfAd}}.jpg" alt='slika za oglas'>
+                <mat-card-content>
+                    <p>
+                        {{accommodationAd.description}}
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <div class="centeredDiv">
+                        <button mat-raised-button color="primary" (click)="showAd('accommodationAd', accommodationAd._id)"> Pregledaj oglas </button>
+                    </div>
+                    
+                </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+
+    </span> 
+
+
+</span> 
+
+
+
+

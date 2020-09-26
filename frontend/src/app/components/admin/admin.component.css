@@ -1,0 +1,93 @@
+
+.centeredDiv
+{
+    text-align: center;
+}
+
+.endDiv {
+    text-align: end;
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+.adminCard
+{
+    margin-top: 5%;
+    
+    background-color: mintcream;
+    color: rgb(68, 65, 65);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+mat-card-content 
+{
+    justify-content: center;
+}
+
+table {
+    width: 100%;
+}
+
+mat-card-header
+{
+    justify-content: center;
+}
+
+mat-header-cell {
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+mat-cell {
+text-align: center;
+justify-content:center;
+}
+
+mat-grid-tile
+{
+    background:mintcream;
+}
+
+
+.mat-tab-group{
+  font-size: 15px;
+  background-color:mintcream;
+}
+
+.table-header-row
+{
+    height: 50px !important;
+    text-align: center;
+    justify-content: center;
+}
+
+.table-row
+{
+    height: 100px !important;
+    text-align: center;
+}
+
+.columnClassSmall
+{
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    width: 20px;
+    background-color:lightblue;
+}
+
+.columnClassBig
+{
+    height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    width: 50px;
+    background-color:lightblue;
+}
+
+/* td:hover {
+    background-color:  #ffb056cc;
+  } */

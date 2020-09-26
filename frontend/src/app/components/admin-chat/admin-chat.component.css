@@ -1,0 +1,70 @@
+
+.chat-messages-show-container{
+  background: mintcream;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  margin-left:25%;
+  margin-right:25%;
+  margin-top: 10px;
+  border-style: double;
+  border-color: #14213D ;
+}
+.chat-messages-show-list {
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+}
+.chat-messages-create-container{
+  background: #14213D;
+  height: 100px;
+  margin-left:25%;
+  margin-right:25%;
+  margin-bottom:10px;
+  display: flex;
+  border-style: double;
+  border-color: #14213D ;
+  justify-content: center;
+}
+.chat-messages-create-input {
+  padding: 12px;
+  margin: 29px 30px;
+  flex:2
+}
+
+.chatButton
+{
+  height: 50px;
+  margin-top: 20px;
+  margin-right: 10px;
+  background-color: mintcream;
+  color: #14213D;
+}
+.centeredDiv
+{
+  text-align: center;
+}
+
+.centeredCard
+{
+  margin-top:10%;
+  margin-bottom: 10%;
+  margin-left: 25%;
+  margin-right: 25%;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+}
+
+
+mat-grid-tile
+{
+    background:mintcream;
+}
+
+
+.mat-tab-group{
+  font-size: 15px;
+  background-color:mintcream;
+}

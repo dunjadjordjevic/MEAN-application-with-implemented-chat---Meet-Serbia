@@ -1,0 +1,127 @@
+<div class="centeredDiv">
+    <mat-card class="centeredCard">
+        <mat-card-header>
+             <mat-card-title>
+                <mat-icon matSuffix>person_pin</mat-icon>
+                <br>
+                Informacije o korisniku <strong> {{usernameFromURL}} </strong> <br>
+                </mat-card-title> 
+        </mat-card-header>
+    
+    <mat-card-content>
+        <form #seeProfileForm="ngForm">
+            <span *ngIf="userFromURL!=null">
+            <table class="centeredTable"> 
+                <tr>
+                    <td colspan="4">
+                        <br>
+                            <img class="classImage" src="{{userFromURL.profilePicture}}.jpg" alt='profilna slika korisnika'> 
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Ime:
+                    </td>
+                    <td>
+                        {{userFromURL.name}}
+                    </td>
+                    <td *ngIf="haveUsernameInURL==true && userFromURL.username==loggedUser.username">
+                        <mat-form-field>
+                            <mat-label>Ime za izmenu</mat-label>
+                            <input matInput [(ngModel)]="nameForChange" name="nameForChange">
+                        </mat-form-field>
+                        &nbsp; &nbsp;
+                    </td>
+                    <td  *ngIf="haveUsernameInURL==true && userFromURL.username==loggedUser.username">
+                        <button mat-raised-button color="warn" (click)="changeProperty('name')"> Izmeni </button>
+                    </td>
+                </tr>   
+                <tr>
+                    <td>
+                        Prezime:
+                    </td>
+                    <td>
+                        {{userFromURL.surname}}
+                    </td>
+                    <td  *ngIf="haveUsernameInURL==true && userFromURL.username==loggedUser.username">
+                        <mat-form-field>
+                            <mat-label>Prezime za izmenu</mat-label>
+                            <input matInput [(ngModel)]="surnameForChange" name="surnameForChange" >
+                        </mat-form-field>
+                        &nbsp; &nbsp;
+                    </td>
+                    <td *ngIf="haveUsernameInURL==true && userFromURL.username==loggedUser.username">
+                        <button mat-raised-button color="warn" (click)="changeProperty('surname')"> Izmeni </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        E-mail:
+                    </td>
+                    <td>
+                        {{userFromURL.email}}
+                    </td>
+                    <td *ngIf="haveUsernameInURL==true && userFromURL.username==loggedUser.username">
+                        <mat-form-field>
+                            <mat-label>E-mail za izmenu</mat-label>
+                            <input matInput [(ngModel)]="emailForChange" name="emailForChange" >
+                        </mat-form-field>
+                        &nbsp; &nbsp;
+                    </td>
+                    <td *ngIf="haveUsernameInURL==true && userFromURL.username==loggedUser.username">
+                        <button mat-raised-button color="warn" (click)="changeProperty('email')"> Izmeni </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Zanimanje:
+                    </td>
+                    <td>
+                        {{userFromURL.occupation}}
+                    </td>
+                    <td *ngIf="haveUsernameInURL==true  && userFromURL.username==loggedUser.username">
+                        <mat-form-field>
+                            <mat-label>Zanimanje za izmenu</mat-label>
+                            <input matInput [(ngModel)]="occupationForChange" name="occupationForChange" >
+                        </mat-form-field>
+                        &nbsp; &nbsp;
+                    </td>
+                    <td *ngIf="haveUsernameInURL==true && userFromURL.username==loggedUser.username">
+                        <button mat-raised-button color="warn" (click)="changeProperty('occupation')"> Izmeni </button>
+                    </td>
+                </tr>
+                <!-- to znaci da neko gleda neciji, a ne svoj profil i tada ne treba da ima mogucnost da izmeni  -->
+                <tr *ngIf="userFromURL.username==loggedUser.username ||  (userFromURL.username!=loggedUser.username && loggedUser.typeOfUser=='buyer' && userFromURL.typeOfUser=='seller')">
+                    
+                    <td>
+                        Kontakt telefon: 
+                    </td>
+                    <td>
+                        {{userFromURL.contactTelephone}}
+                    </td>
+                    <td *ngIf="haveUsernameInURL==true && userFromURL.username==loggedUser.username">
+                        <mat-form-field>
+                            <mat-label>Kontakt telefon za izmenu</mat-label>
+                            <input matInput [(ngModel)]="contactTelephoneForChange" name="contactTelephoneForChange" >
+                        </mat-form-field>
+                        &nbsp; &nbsp;
+                    </td>
+                    <td *ngIf="haveUsernameInURL==true &&  userFromURL.username==loggedUser.username">
+                        <button mat-raised-button color="warn" (click)="changeProperty('contactTelephone')"> Izmeni </button>
+                    </td>
+                </tr>
+            </table>
+        </span>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <div class="centeredDiv">
+            <button *ngIf="haveUsernameInURL==true" mat-raised-button class="buttonColored"  (click)="backToSeller()" color="primary">Nazad</button>
+        </div>
+    </mat-card-actions>
+
+    </mat-card>
+</div>
+

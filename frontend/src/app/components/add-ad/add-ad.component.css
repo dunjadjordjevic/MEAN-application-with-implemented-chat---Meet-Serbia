@@ -1,0 +1,72 @@
+.centeredDiv
+{
+    text-align: center;
+}
+
+.addAdCard
+{
+    margin-top: 5%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 5%;
+    height: 500px;
+    background-color: mintcream;
+    color: rgb(68, 65, 65);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* .mat-card-subtitle
+{
+    color: mintcream;
+} */
+
+.headerClass {
+   
+    padding: 5px !important;
+    justify-content: center;
+}
+
+.mat-card {
+    padding: 0 !important;
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  .centeredTable{
+      width: 100%;
+  }
+
+  
+  .textAreaTD
+  {
+    margin: 0 auto;
+    border-left: 2px solid #1565c0 ;
+    
+  }
+
+
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #ff9925!important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+   border-color:#1565c0!important; /*outer ring color change*/
+}
+
+.uploadFileButton
+{
+    color: #ff9925;
+    background-color: #1565c0 ;
+}
+
+
+
